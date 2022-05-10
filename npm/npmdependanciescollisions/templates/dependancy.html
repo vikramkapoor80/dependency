@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    <div class="row">
+        <h3>Packages</h3>
+        <div class="col-12">
+            <h6>Package A: {{ packageA }} - Version: {{packageAVersion}}</h6> 
+
+        </div>
+
+        <div class="col-12">
+            <h6>Package B: {{ packageB }} - Version: {{packageBVersion}}</h6>
+
+        </div>
+    </div>
+
+
+    <div class="row mt-2">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning" role="alert">
+        {{ message }}
+      </div>
+      {% endfor %}
+    {% endif %}
+
+    </div>
+
+
+   
+      {% if results |length > 0 %}
+      
+      <div class="row mt-2">
+      <table class="table table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Conflicts [dependency_package_name, version_for_a, version_for_b]</th>
+         
+          </tr>
+        </thead>
+        <tbody>
+            {% for conflict in results %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ conflict }}</td>
+            </tr>
+          {% endfor %}
+  
+        </tbody>
+      </table>
+    </div>
+
+      {% else %}
+      <div class="row mt-2">
+      <div class="card card-info">
+        <div class="card-body">
+          Not Results Found
+        </div>
+      </div>
+    </div>
+
+
+
+      {% endif %}
+
+ 
+
+{% endblock %}
